@@ -1,0 +1,21 @@
+{
+  /*
+   | This file is automatically updated by ModManifestBuilder
+   | when the project is compiled.
+   | 
+   | Changes made to this file may be overwritten.
+   | 
+   */
+  "$schema": "https://smapi.io/schemas/manifest.json",
+  "UniqueID": "suzukiPC.NightingaleCityClockCode",
+  "Name": "Nightingale City Clock Code",
+  "Author": "rokugin",
+  "Version": "1.0.0",
+  "Description": "Code component for Nightingale City clock tower.",
+  "MinimumApiVersion": "4.3.2",
+  "MinimumGameVersion": "1.6.15",
+  "EntryDll": "NightingaleCityClockCode.dll",
+  "UpdateKeys": [
+    "Nexus:0"
+  ]
+}
