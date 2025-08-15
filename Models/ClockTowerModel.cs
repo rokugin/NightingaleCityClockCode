@@ -2,15 +2,16 @@
     public sealed class ClockTowerModel {
 
         public string? LocationName { get; set; }
-        public HourHandTilePosition? HourHandTilePosition { get; set; }
-        public MinuteHandTilePosition? MinuteHandTilePosition { get; set; }
-        public NubTilePosition? NubTilePosition { get; set; }
+        public NubTilePosition? TilePosition { get; set; }
         public HourHandTextureSourceLocation? HourHandTextureSourceLocation { get; set; }
         public MinuteHandTextureSourceLocation? MinuteHandTextureSourceLocation { get; set; }
         public NubTextureSourceLocation? NubTextureSourceLocation { get; set; }
         public HourHandRotationOrigin? HourHandRotationOrigin { get; set; }
         public MinuteHandRotationOrigin? MinuteHandRotationOrigin { get; set; }
         public NubOrigin? NubOrigin { get; set; }
+        public float HourHandScale { get; set; }
+        public float MinuteHandScale { get; set; }
+        public float NubScale { get; set; }
 
     }
 

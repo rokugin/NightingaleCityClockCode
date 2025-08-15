@@ -14,9 +14,7 @@ public class ClockHands {
     static float hourRotation;
     static float minuteRotation;
 
-    static Vector2 hourHandPosition;
-    static Vector2 minuteHandPosition;
-    static Vector2 nubPosition;
+    static Vector2 position;
 
     static Rectangle hourHandTextureSource;
     static Rectangle minuteHandTextureSource;
@@ -30,9 +28,9 @@ public class ClockHands {
     static Vector2 minuteOrigin;
     static Vector2 nubOrigin;
 
-    static float hourScale = 4f;
-    static float minuteScale = 4f;
-    static float nubScale = 4f;
+    static float hourScale;
+    static float minuteScale;
+    static float nubScale;
 
     static int towerTileHeight = 10;
 
@@ -43,9 +41,7 @@ public class ClockHands {
     public static void SetupClockVariables() {
         ClockTowerModel data = AssetManager.ClockTowerData.First().Value;
 
-        hourHandPosition = new Vector2(data.HourHandTilePosition!.x, data.HourHandTilePosition.y) * 64;
-        minuteHandPosition = new Vector2(data.MinuteHandTilePosition!.x, data.MinuteHandTilePosition.y) * 64;
-        nubPosition = new Vector2(data.NubTilePosition!.x, data.NubTilePosition.y) * 64;
+        position = new Vector2(data.TilePosition!.x, data.TilePosition.y) * 64;
 
         hourHandTextureSource = new Rectangle(data.HourHandTextureSourceLocation!.x, data.HourHandTextureSourceLocation.y,
             data.HourHandTextureSourceLocation.width, data.HourHandTextureSourceLocation.height);
@@ -58,9 +54,13 @@ public class ClockHands {
         minuteOrigin = new Vector2(data.MinuteHandRotationOrigin!.x, data.MinuteHandRotationOrigin.y);
         nubOrigin = new Vector2(data.NubOrigin!.x, data.NubOrigin.y);
 
-        hourDepth = (float)((hourHandPosition.Y + towerTileHeight) * 64) / 10000f + 0.0001f;
-        minuteDepth = (float)((minuteHandPosition.Y + towerTileHeight) * 64) / 10000f + 0.00011f;
-        nubDepth = (float)((nubPosition.Y + towerTileHeight) * 64) / 10000f + 0.00012f;
+        hourScale = data.HourHandScale;
+        minuteScale = data.MinuteHandScale;
+        nubScale = data.NubScale;
+
+        hourDepth = (float)((position.Y + towerTileHeight) * 64) / 10000f + 0.0001f;
+        minuteDepth = (float)((position.Y + towerTileHeight) * 64) / 10000f + 0.00011f;
+        nubDepth = (float)((position.Y + towerTileHeight) * 64) / 10000f + 0.00012f;
     }
 
     public static void RenderClockHands(RenderedWorldEventArgs e) {
@@ -76,7 +76,7 @@ public class ClockHands {
         minuteRotation = (float)Math.Tau * (adjustedMinutes + Game1.gameTimeInterval / (float)Game1.realMilliSecondsPerGameTenMinutes / 6);
 
         b.Draw(ClockTexture,
-            Game1.GlobalToLocal(Game1.viewport, hourHandPosition),
+            Game1.GlobalToLocal(Game1.viewport, position),
             hourHandTextureSource,
             hourColor,
             hourRotation,
@@ -86,7 +86,7 @@ public class ClockHands {
             hourDepth);
 
         b.Draw(ClockTexture,
-            Game1.GlobalToLocal(Game1.viewport, minuteHandPosition),
+            Game1.GlobalToLocal(Game1.viewport, position),
             minuteHandTextureSource,
             minuteColor,
             minuteRotation,
@@ -96,7 +96,7 @@ public class ClockHands {
             minuteDepth);
 
         b.Draw(ClockTexture,
-            Game1.GlobalToLocal(Game1.viewport, nubPosition),
+            Game1.GlobalToLocal(Game1.viewport, position),
             nubTextureSource,
             nubColor,
             0f,
